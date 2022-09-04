@@ -2,18 +2,18 @@ version: '3'
 services:
 
   ### SPRING API
-  spring_api_app:
-    image: docker_spring_api_app
-    build:
-      context: .
-    container_name: app
-    env_file:
-      - .env.local
-    ports:
-      - 8080:8080
-    depends_on:
-      - twitter_postgres
-      - twitter_redis
+#  spring_api_app:
+#    image: docker_spring_api_app
+#    build:
+#      context: .
+#    container_name: app
+#    env_file:
+#      - .env.local
+#    ports:
+#      - 8080:8080
+#    depends_on:
+#      - twitter_postgres
+#      - twitter_redis
 
   ## DATABASE
   twitter_postgres:
@@ -28,7 +28,7 @@ services:
       LANGUAGE: en_US:en
       LC_ALL: en_US.UTF-8
     ports:
-      - "25432:5432"
+      - "35432:5432"
     volumes:
       - twitter-postgres:/var/lib/postgresql/data
 
