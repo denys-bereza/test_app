@@ -1,14 +1,24 @@
 package com.denys_bereza.test_app.controllers;
 
-import com.denys_bereza.test_app.constants.Regions;
-import com.denys_bereza.test_app.constants.UserStatuses;
+import com.denys_bereza.test_app.dto.GenericResponse;
+import com.denys_bereza.test_app.dto.UserDTO;
 import com.denys_bereza.test_app.models.User;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import com.denys_bereza.test_app.services.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
+    Logger logger = LoggerFactory.getLogger(UserController.class);
+    private UserService service;
+
+    @Autowired
+    public UserController(UserService service) {
+        this.service = service;
+    }
 
     @RequestMapping(
             value = "/users",
@@ -16,13 +26,13 @@ public class UserController {
             produces="application/json",
             consumes="application/json"
     )
-    public User getUsers() {
-        User user = new User();
-        user.setRegion(Regions.OCEANIA);
-        user.setEmail("some@mail.com");
-        user.setName("xxx");
-        user.setStatus(UserStatuses.ACTIVE);
-
-        return user;
+    @ResponseBody
+    public GenericResponse<User> createUser(@RequestBody UserDTO userData) {
+        try {
+            User user = this.service.createUser(userData);
+            return new GenericResponse<User>(true, "Created").withData(user);
+        } catch (DataIntegrityViolationException e) {
+            return new GenericResponse(false, "Already exist");
+        }
     }
 }

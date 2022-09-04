@@ -25,7 +25,7 @@ public class User {
     private String email;
 
     @Column(nullable = false)
-    private Regions region;
+    private String region;
 
     @Column(nullable = false)
     private UserStatuses status;
@@ -44,6 +44,16 @@ public class User {
 
     @ManyToMany(mappedBy = "following")
     private List<User> followers;
+
+    public User() {
+    }
+
+    public User(String name, String email, Regions region) {
+        this.name = name;
+        this.email = email;
+        this.region = region.toString();
+        this.status = UserStatuses.ACTIVE;
+    }
 
     public UUID getId() {
         return id;
@@ -70,11 +80,11 @@ public class User {
     }
 
     public Regions getRegion() {
-        return region;
+        return Regions.valueOf(region);
     }
 
     public void setRegion(Regions region) {
-        this.region = region;
+        this.region = region.toString();
     }
 
     public UserStatuses getStatus() {
