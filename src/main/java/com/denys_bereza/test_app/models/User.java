@@ -94,4 +94,16 @@ public class User {
     public void setStatus(UserStatuses status) {
         this.status = status;
     }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public List<User> getFollowing() {
+        return following;
+    }
+
+    public List<User> getFollowers() {
+        return followers;
+    }
 }

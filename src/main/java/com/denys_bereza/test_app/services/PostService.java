@@ -1,12 +1,12 @@
 package com.denys_bereza.test_app.services;
 
 import com.denys_bereza.test_app.models.Post;
-import com.denys_bereza.test_app.models.User;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface PostService {
-    public List<Post> getFeeds(User user);
+    public List<Post> getFeeds(String userID);
 
-    public void createPost(User user, Post post);
+    public Post createPost(String text, UUID userID);
 }

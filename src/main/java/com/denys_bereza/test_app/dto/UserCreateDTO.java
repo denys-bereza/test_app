@@ -2,7 +2,7 @@ package com.denys_bereza.test_app.dto;
 
 import com.denys_bereza.test_app.constants.Regions;
 
-public class UserDTO {
+public class UserCreateDTO {
     private String name;
     private String email;
     private Regions region;

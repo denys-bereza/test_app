@@ -1,7 +1,7 @@
 package com.denys_bereza.test_app.controllers;
 
 import com.denys_bereza.test_app.dto.GenericResponse;
-import com.denys_bereza.test_app.dto.UserDTO;
+import com.denys_bereza.test_app.dto.UserCreateDTO;
 import com.denys_bereza.test_app.models.User;
 import com.denys_bereza.test_app.services.UserService;
 import org.slf4j.Logger;
@@ -27,7 +27,7 @@ public class UserController {
             consumes="application/json"
     )
     @ResponseBody
-    public GenericResponse<User> createUser(@RequestBody UserDTO userData) {
+    public GenericResponse<User> createUser(@RequestBody UserCreateDTO userData) {
         try {
             User user = this.service.createUser(userData);
             return new GenericResponse<User>(true, "Created").withData(user);

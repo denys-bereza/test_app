@@ -1,6 +1,6 @@
 package com.denys_bereza.test_app.services;
 
-import com.denys_bereza.test_app.dto.UserDTO;
+import com.denys_bereza.test_app.dto.UserCreateDTO;
 import com.denys_bereza.test_app.models.User;
 import com.denys_bereza.test_app.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(UserDTO data) {
+    public User createUser(UserCreateDTO data) {
         User user = new User(data.getName(), data.getEmail(), data.getRegion());
         this.userRepository.save(user);
 
